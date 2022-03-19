@@ -11,7 +11,7 @@ export const loginRules = {
       message: "请输入长度为5~10的账号长度",
     },
   ],
-  passworld: [
+  password: [
     {
       required: true,
       message: "请输入密码",

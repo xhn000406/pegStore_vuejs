@@ -1,4 +1,4 @@
-export interface IformData {
+export interface IAccount {
   name: string;
   password: string;
 }

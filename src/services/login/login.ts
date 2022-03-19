@@ -11,4 +11,3 @@ export function accountLoginRequest(account: IAccount) {
     data: account,
   });
 }
-

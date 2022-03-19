@@ -13,7 +13,8 @@
     "element-plus": "^2.1.4",
     "less": "^4.1.2",
     "pinia": "^2.0.12",
-    "vue": "^3.2.25"
+    "vue": "^3.2.25",
+    "vue-router": "^4.0.14"
   },
   "devDependencies": {
     "@types/node": "^17.0.21",

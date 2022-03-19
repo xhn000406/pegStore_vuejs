@@ -24,13 +24,12 @@ export default defineConfig({
       "@": resolve(__dirname, "./src"),
     },
   },
-  // css: {
-  //   // css预处理器
-  //   preprocessorOptions: {
-  //     less: {
-  //       charset: false,
-  //       additionalData: '@import "./src/assets/style/global.less";',
-  //     },
-  //   },
-  // },
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:9090",
+        changeOrigin: true,
+      },
+    },
+  },
 });

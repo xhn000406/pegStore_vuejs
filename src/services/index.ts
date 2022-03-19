@@ -1,13 +1,14 @@
 import HYRequest from "./request";
+import { localUtil } from "@/utils/localUtil";
 
 const hyRequest = new HYRequest({
-  baseURL: "/api",
+  baseURL: "http://localhost:9090/",
   timeout: 1000,
 
   interceptors: {
     requestInterceptor: (config) => {
       //携带token拦截
-      const token = "";
+      const token = localUtil.setLocal("token") ?? "";
       if (token) {
         const configs = config.headers as any;
         configs.Authorization = `${token}`;

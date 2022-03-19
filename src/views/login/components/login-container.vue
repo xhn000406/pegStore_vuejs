@@ -1,7 +1,7 @@
 <template>
   <div id="container">
     <h2 class="title">移动网盘</h2>
-    <el-tabs type="border-card" stretch="true">
+    <el-tabs type="border-card" :stretch="true">
       <el-tab-pane label="用户登陆">
         <LoginUserLogin></LoginUserLogin>
       </el-tab-pane>
