@@ -32,10 +32,9 @@ const fromData: IformData = reactive({
 const form = ref<FormInstance>();
 const store = useStore();
 const router = useRouter();
-
 const loginBtn = () => {
   form.value?.validate((vaile: boolean) => {
-    if (vaile == true) {
+    if (vaile === true) {
       store.getLoginData(fromData);
       router.push("/home");
     }

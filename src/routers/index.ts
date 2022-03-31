@@ -15,19 +15,46 @@ const routes: RouteRecordRaw[] = [
     path: "/home",
     name: "home",
     component: () => import("@/views/home/home.vue"),
+    children: [
+      {
+        path: "/system/user",
+        name: "user",
+        component: () => import("@/views/home/system/user/user.vue"),
+      },
+      {
+        path: "/system/dashboard",
+        name: "dashboard",
+        component: () => import("@/views/home/system/user/dashboard.vue"),
+      },
+      {
+        path: "/user/userinfo",
+        name: "userinfo",
+        component: () => import("@/views/home/system/userinfo/userinfo.vue"),
+      },
+      {
+        path: "/peg/shop",
+        name: "pegshop",
+        component: () => import("@/views/home/system/peg/pegshop.vue"),
+      },
+      {
+        path: "/peg/info",
+        name: "peginfo",
+        component: () => import("@/views/home/system/peg/peginfo.vue"),
+      },
+    ],
   },
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
   routes: routes,
+  history: createWebHistory(),
 });
 
 router.beforeEach((to) => {
   if (to.path !== "/login") {
     const token = localUtil.setLocal("token");
     if (!token) {
-      return "login";
+      return "/login";
     }
   }
 });
