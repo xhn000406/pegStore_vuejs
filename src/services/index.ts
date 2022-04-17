@@ -11,8 +11,8 @@ const hyRequest = new HYRequest({
       const token = localUtil.setLocal("token") ?? "";
       if (token) {
         const configs = config.headers as any;
-        configs.Authorization = `${token}`;
-        configs.headers["Content-Type"] = "application/json;charset=utf-8";
+        configs.Authorization = `Bearer ${token}`;
+        config.headers["Content-Type"] = "application/json;charset=utf-8";
         config.data = JSON.stringify(config.data);
       }
       console.log("请求芥蓝");

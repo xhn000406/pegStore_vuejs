@@ -7,18 +7,25 @@
 
 <script setup lang="ts">
 import { inject, ref, watch } from "vue";
+import { localUtil } from "@/utils/localUtil";
+
 import HnBreadcrumb from "@/base-ui/hn-breadcrumb/src/hn-breadcrumb.vue";
-import { useRouter } from "vue-router";
 import HeaderUserinfo from "./header-userinfo.vue";
 
+import { useRouter, useRoute } from "vue-router";
+import { useStore } from "@/stores/login";
+
 const MenuData: any = inject("menuData");
-
+const store = useStore();
 const router = useRouter();
+const route = useRoute();
 
-const breadCrumb = ref([
-  { name: "个人状况", url: "" },
-  { name: "个人信息", url: "/system/user" },
-]);
+const breadCrumb = ref(
+  localUtil.setLocal("bereadCrumb") ?? [
+    { name: "宠物商城", url: "" },
+    { name: "欢迎光临", url: "" },
+  ]
+);
 watch(
   () => router.currentRoute.value,
   (toPath: any) => {
@@ -30,11 +37,8 @@ watch(
           breadCrumb.value[1].url = toPath.path;
         }
       });
+      store.saveBreadCrumb(breadCrumb.value);
     });
-
-    // if (`/${item.children[0].url}` === toPath.path) {
-    //   breadCrumb.value[0].name = item.children[0].title;
-    // };
   }
 );
 </script>

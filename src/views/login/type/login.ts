@@ -1,4 +1,4 @@
 export interface IformData {
-  name: string;
+  username: string;
   password: string;
 }

@@ -1,10 +1,12 @@
 export interface IAccount {
-  name: string;
+  username: string;
   password: string;
 }
 
 export interface IloginResult {
-  id: number;
-  name: string;
-  token: string;
+  data: {
+    id: number;
+    username: string;
+    token: string;
+  };
 }

@@ -8,4 +8,7 @@ export const localUtil = {
       return JSON.parse(value);
     }
   },
+  clearLocal() {
+    return window.localStorage.clear();
+  },
 };

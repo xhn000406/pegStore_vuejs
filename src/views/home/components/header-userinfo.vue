@@ -3,7 +3,7 @@
     <el-dropdown :hide-on-click="false">
       <span class="el-dropdown-link">
         <el-icon style="padding-right: 4px"><user></user></el-icon>
-        {{ store.$state.name
+        {{ store.$state.username
         }}<el-icon class="el-icon--right"><arrow-down /></el-icon>
       </span>
       <template #dropdown>
@@ -11,7 +11,7 @@
           <el-dropdown-item>个人信息</el-dropdown-item>
           <el-dropdown-item>聊天窗口</el-dropdown-item>
           <el-divider />
-          <el-dropdown-item>退出登陆</el-dropdown-item>
+          <el-dropdown-item @click="exitLogin">退出登陆</el-dropdown-item>
         </el-dropdown-menu>
       </template>
     </el-dropdown>
@@ -21,8 +21,16 @@
 <script setup lang="ts">
 import { ArrowDown, User } from "@element-plus/icons-vue";
 import { useStore } from "@/stores/login";
+import { localUtil } from "@/utils/localUtil";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const store = useStore();
+
+const exitLogin = () => {
+  router.push("/login");
+  localUtil.clearLocal();
+};
 </script>
 
 <style scoped lang="less">

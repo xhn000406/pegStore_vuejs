@@ -1,5 +1,5 @@
 export const loginRules = {
-  name: [
+  username: [
     {
       required: true,
       message: "请输入账号",

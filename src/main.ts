@@ -12,5 +12,4 @@ const pinpia = createPinia();
 const app = createApp(App);
 app.use(router);
 app.use(pinpia);
-
 app.mount("#app");

@@ -2,7 +2,7 @@ import XuRequest from "../index";
 import { IAccount, IloginResult } from "./type";
 
 enum LoginApi {
-  AccountLogin = "/login",
+  AccountLogin = "auth/login",
 }
 
 export function accountLoginRequest(account: IAccount) {

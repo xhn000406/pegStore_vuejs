@@ -1,30 +1,29 @@
 import { defineStore } from "pinia";
 import { accountLoginRequest } from "@/services/login/login";
-import { IAccount } from "./type/login";
+import { IAccount, IBreadCrumb } from "./type/login";
 import { localUtil } from "@/utils/localUtil";
-import { useLocalStorage } from "@vueuse/core";
 
 export const useStore = defineStore("loginStore", {
   state: () => ({
     id: 0,
-    name: localUtil.setLocal("name"),
-    token: localUtil.setLocal("token"),
-    n: useLocalStorage("key", 0),
+    username: localUtil.setLocal("username") ?? "",
+    token: localUtil.setLocal("token") ?? "",
+    breadCrumb: localUtil.setLocal("breadCrumb") ?? "",
   }),
-  getters: {
-    demo({ ...payload }) {
-      console.log(payload);
-    },
-  },
+  getters: {},
   actions: {
     async getLoginData(payload: IAccount) {
-      const { id, name, token } = await accountLoginRequest(payload);
-      this.$state.name = name;
-      this.$state.id = id;
-      this.$state.token = token;
+      const { data: res } = await accountLoginRequest(payload);
 
-      localUtil.saveLocal("token", token);
-      localUtil.saveLocal("name", name);
+      this.$state.username = res.username;
+      this.$state.token = res.token;
+
+      localUtil.saveLocal("token", res.token);
+      localUtil.saveLocal("username", res.username);
+    },
+    saveBreadCrumb(data: any) {
+      this.$state.breadCrumb = data;
+      localUtil.saveLocal("bereadCrumb", data);
     },
   },
 });

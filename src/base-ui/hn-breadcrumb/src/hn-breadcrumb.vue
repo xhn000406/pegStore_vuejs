@@ -19,7 +19,6 @@ const prop = defineProps({
     type: Object,
   },
 });
-console.log(prop.breadCrumb);
 </script>
 <style scoped lang="less">
 .el-breadcrumb {

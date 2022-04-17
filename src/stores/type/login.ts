@@ -1,4 +1,8 @@
 export interface IAccount {
-  name: string;
+  username: string;
   password: string;
+}
+export interface IBreadCrumb<T> {
+  url: string;
+  name: string;
 }

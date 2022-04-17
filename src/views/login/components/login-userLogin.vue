@@ -1,11 +1,15 @@
 <template>
   <div class="userLogin">
     <el-form :model="fromData" :rules="loginRules" ref="form">
-      <el-form-item label="账号" prop="name" hide-required-asterisk>
-        <el-input v-model="fromData.name" :suffix-icon="Edit"></el-input>
+      <el-form-item label="账号" prop="username" hide-required-asterisk>
+        <el-input v-model="fromData.username" :suffix-icon="Edit"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password" hide-required-asterisk>
-        <el-input v-model="fromData.password" show-password></el-input>
+        <el-input
+          v-model="fromData.password"
+          show-password
+          @keyup.enter.native="loginBtn()"
+        ></el-input>
       </el-form-item>
     </el-form>
     <div class="asscount-login">
@@ -25,7 +29,7 @@ import { useStore } from "@/stores/login";
 import { useRouter } from "vue-router";
 
 const fromData: IformData = reactive({
-  name: "",
+  username: "",
   password: "",
 });
 
@@ -35,8 +39,10 @@ const router = useRouter();
 const loginBtn = () => {
   form.value?.validate((vaile: boolean) => {
     if (vaile === true) {
-      store.getLoginData(fromData);
-      router.push("/home");
+      const result = store.getLoginData(fromData);
+      if (result) {
+        return router.push("/home");
+      }
     }
   });
 };
