@@ -1,4 +1,4 @@
-export interface Ishopkeeper {
+export interface IshopkeeperResult {
   id: number;
   username: string;
   password: string;
@@ -7,6 +7,11 @@ export interface Ishopkeeper {
   fans: number;
   shop: string;
   shopper: number;
+}
+
+export interface Ishopkeeper {
+  count: number;
+  result: IshopkeeperResult[];
 }
 
 export interface IshopkeeperData {

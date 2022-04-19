@@ -4,13 +4,13 @@
       <div>
         <h2>{{ title }}</h2>
       </div>
-      <div>
-        <el-button type="primary">查询</el-button>
-        <el-button type="primary">增加商品</el-button>
+      <div class="slot_handle">
+        <slot name="search"></slot>
+        <slot name="create"></slot>
       </div>
     </div>
     <el-table
-      :data="tableData"
+      :data="tableData.result"
       stripe
       style="width: 100%"
       @selection-change="handleSelectionChange"
@@ -32,12 +32,15 @@
 
 <script setup lang="ts">
 import { Ishopkeeper } from "@/services/shopkeeper/type";
+import { computed } from "@vue/reactivity";
 import { PropType, ref } from "vue";
 
 const prop = defineProps({
   title: { type: String, require: true },
-  tableData: { type: Array as PropType<Ishopkeeper[]>, require: true },
+  tableData: { type: Object as PropType<Ishopkeeper>, require: true },
 });
+
+console.log(prop.tableData?.result);
 
 const handleSelectionChange = () => {
   console.log(123);
@@ -98,5 +101,8 @@ const tableProp = [
   align-items: center;
   margin-left: 20px;
   margin-right: 20px;
+}
+.slot_handle {
+  display: flex;
 }
 </style>
