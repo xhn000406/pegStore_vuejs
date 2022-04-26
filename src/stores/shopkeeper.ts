@@ -12,22 +12,23 @@ export const useStore = defineStore("shopkeeperStore", {
     shopkeeper: [] as Array<Ishopkeeper>,
   }),
   actions: {
-    async getShopkeeperData() {
-      const { data } = await getshopkeeperRequest();
+    async getShopkeeperData(params) {
+      const { data } = await getshopkeeperRequest(params);
       this.$state.shopkeeper = data;
     },
     async delteShopkeeperData(id: number) {
       const result = await deleteShopkeeperRequest(id);
-      await this.getShopkeeperData();
-      return result;
+      if (result) {
+        return await this.getShopkeeperData();
+      }
     },
     async searchShopkeeperData(e: string) {
       const req = { username: e };
 
-      const { data: res } = await searchShopkeeperRequest(req);
-      const result = res.result;
+      const { data } = await searchShopkeeperRequest(req);
+      console.log(data);
 
-      this.$state.shopkeeper = result;
+      this.$state.shopkeeper = data;
     },
   },
 });

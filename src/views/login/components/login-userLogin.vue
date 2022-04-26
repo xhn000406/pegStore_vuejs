@@ -39,7 +39,7 @@ const router = useRouter();
 const loginBtn = () => {
   form.value?.validate((vaile: boolean) => {
     if (vaile === true) {
-      const result = store.getLoginData(fromData);
+      const result: Object | undefined = store.getLoginData(fromData);
       if (result) {
         return router.push("/home");
       }

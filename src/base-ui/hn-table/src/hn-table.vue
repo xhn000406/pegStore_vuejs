@@ -27,20 +27,24 @@
         </el-table-column>
       </template>
     </el-table>
+
+    <div class="slot_bottom">
+      <slot name="bottom_handle"></slot>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { Ishopkeeper } from "@/services/shopkeeper/type";
 import { computed } from "@vue/reactivity";
-import { PropType, ref } from "vue";
+
+import { PropType, ref, watch, nextTick } from "vue";
 
 const prop = defineProps({
   title: { type: String, require: true },
   tableData: { type: Object as PropType<Ishopkeeper>, require: true },
+  tableProp: { type: Array, require: true },
 });
-
-console.log(prop.tableData?.result);
 
 const handleSelectionChange = () => {
   console.log(123);
@@ -49,44 +53,6 @@ const handleSelectionChange = () => {
 const handleCurrentChange = () => {
   console.log(123);
 };
-
-const tableProp = [
-  {
-    prop: "username",
-    label: "账号",
-    width: "100",
-  },
-
-  {
-    prop: "fans",
-    label: "粉丝",
-    slotname: "fans",
-  },
-  {
-    prop: "shop",
-    label: "店铺名字",
-    width: "120",
-  },
-  {
-    prop: "shopper",
-    label: "总收入",
-    slotname: "shopper",
-  },
-  {
-    prop: "createTime",
-    label: "创造时间",
-    slotname: "createAt",
-  },
-  {
-    prop: "updateTime",
-    label: "修改时间",
-    slotname: "updateAt",
-  },
-  {
-    label: "操作",
-    slotname: "handle",
-  },
-];
 </script>
 
 <style scoped lang="less">
@@ -104,5 +70,11 @@ const tableProp = [
 }
 .slot_handle {
   display: flex;
+}
+.slot_bottom {
+  margin-top: 70px;
+  margin-right: 70px;
+  display: flex;
+  justify-content: flex-end;
 }
 </style>
