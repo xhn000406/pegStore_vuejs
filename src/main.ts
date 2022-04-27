@@ -1,6 +1,7 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 
+import 'default-passive-events'
 import "@/assets/css/base.less";
 import "@element-plus/icons-vue";
 

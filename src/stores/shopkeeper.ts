@@ -12,7 +12,7 @@ export const useStore = defineStore("shopkeeperStore", {
     shopkeeper: [] as Array<Ishopkeeper>,
   }),
   actions: {
-    async getShopkeeperData(params) {
+    async getShopkeeperData(params?: igetShopkeeperParams) {
       const { data } = await getshopkeeperRequest(params);
       this.$state.shopkeeper = data;
     },

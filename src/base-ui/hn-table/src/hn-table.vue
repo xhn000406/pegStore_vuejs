@@ -10,14 +10,14 @@
       </div>
     </div>
     <el-table
-      :data="tableData.result"
+      :data="tableData?.result"
       stripe
       style="width: 100%"
       @selection-change="handleSelectionChange"
       @current-chang="handleCurrentChange"
     >
       <el-table-column type="selection" width="60" />
-      <template v-for="item in tableProp">
+      <template v-for="item in (tableProp as any)">
         <el-table-column align="center" :="item" :width="item.width">
           <template #default="scope">
             <slot :name="item.slotname" :row="scope.row">
@@ -36,18 +36,17 @@
 
 <script setup lang="ts">
 import { Ishopkeeper } from "@/services/shopkeeper/type";
-import { computed } from "@vue/reactivity";
 
-import { PropType, ref, watch, nextTick } from "vue";
+import { PropType } from "vue";
 
-const prop = defineProps({
+defineProps({
   title: { type: String, require: true },
   tableData: { type: Object as PropType<Ishopkeeper>, require: true },
   tableProp: { type: Array, require: true },
 });
 
-const handleSelectionChange = () => {
-  console.log(123);
+const handleSelectionChange = (id: number) => {
+  console.log(id);
 };
 
 const handleCurrentChange = () => {

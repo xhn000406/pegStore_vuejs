@@ -7,7 +7,10 @@
       ref="hnTableRef"
     >
       <template #shopName="scope">
-        {{ scope.row.id }}
+        <el-input
+          v-show="scope.row.id === isShopName"
+          v-model="shopNameValue"
+        ></el-input>
       </template>
 
       <template #search>
@@ -67,7 +70,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import { IshopkeeperResult } from "@/services/shopkeeper/type";
+import { Ishopkeeper, IshopkeeperResult } from "@/services/shopkeeper/type";
 import { useStore } from "@/stores/shopkeeper";
 import { transformStamp } from "@/utils/data-format";
 import { Search, Edit, Delete } from "@element-plus/icons-vue";
@@ -77,7 +80,8 @@ import { tableProp } from "./config/tableProp";
 //ref
 const hnTableRef = ref();
 const searchInput = ref("");
-const isShopName = ref(false);
+const isShopName = ref();
+const shopNameValue = ref();
 
 // store
 const store = useStore();
@@ -89,8 +93,7 @@ const tableData: any = computed(() => {
 
 //handle
 const handleExitClick = (rowData: any) => {
-  isShopName.value = !isShopName.value;
-  console.log(rowData.id);
+  isShopName.value = rowData.id;
 };
 const handleDeletClick = (rowData: IshopkeeperResult) => {
   store.delteShopkeeperData(rowData.id);
